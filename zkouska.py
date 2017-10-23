@@ -1,4 +1,3 @@
-retezec='-'*20
 #radek=input('Zadej hrací pole o 20 polích: ')
 def vyhodnot(radek):
     'Vrátí jednoznakový řetezec podle stavu hry'
@@ -17,7 +16,7 @@ def vyhodnot(radek):
 def tah(retezec, cislo_pole, symbol):
     return retezec[:cislo_pole] + symbol + retezec[cislo_pole + 1:]
 
-def tah_hrace(otazka):
+def tah_hrace(retezec, otazka):
     while True:
         cislo_pole=int(input(otazka))
         if cislo_pole<0:
@@ -32,8 +31,7 @@ def tah_hrace(otazka):
 #print(tah_hrace('Zadej číslo pole od 0 do 19:'))
 
 from random import randrange
-pole=randrange(19)
-def tah_pocitace (pole):
+def tah_pocitace(retezec):
     while True:
         pole=randrange(19)
         if '-' in retezec[:pole]:
@@ -41,11 +39,15 @@ def tah_pocitace (pole):
 
 #print(tah_pocitace(pole))
 
-def piskvorky1d (hrac, pocitac):
+def piskvorky1d():
     retezec='-'*20 # cyklus, co uloží řetezec s novými hodnotami
     while '-' in retezec:
-        return(tah_hrace('Zadej číslo pole od 0 do 19:'))
-        return (retezec)
-        return (tah_pocitace(pole))
-        return (vyhodot(radek))
-print(piskvorky1d('-'*20))
+        print(retezec)
+        retezec = tah_hrace(retezec, 'Zadej číslo pole od 0 do 19:')
+        retezec = tah_pocitace(retezec)
+        vysledek = vyhodnot(retezec)
+        if vysledek != '\'-\'':
+            print(vysledek)
+            break
+
+piskvorky1d()
